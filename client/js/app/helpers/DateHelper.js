@@ -5,15 +5,17 @@ class DateHelper {
     }
 
     static textoParaData(texto) {
-        return new Date(
-            ...texto.split('-')
-                .map((item, indice) => (item - indice % 2)));
+        if (/^\d{4}-\d{2}-\d{2}$/.test(texto)) {
+            return new Date(
+                ...texto.split('-')
+                    .map((item, indice) => (item - indice % 2)));
+                
+        }
+        throw new Error('Data fora do formato: yyyy-MM-dd');
     }
 
     static dataParaTexto(data) {
-        return data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
-
-
+        return  `${data.getDate()}/${(data.getMonth() + 1)}/${data.getFullYear()}`;
     }
 
 
